@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 
 const db = new Sequelize(
-  process.env.DATABASE_URL || 'postgres://localhost/pillars',
-  {
-    logging: false,
-  }
+	process.env.DATABASE_URL || "postgres://localhost/pillars",
+	{
+		logging: false,
+	}
 );
 
 module.exports = db;
