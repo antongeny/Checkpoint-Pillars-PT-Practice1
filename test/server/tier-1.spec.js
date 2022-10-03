@@ -114,7 +114,7 @@ describe("Tier 1: Basic Fields, Class Methods, GET Routes", () => {
 			});
 		});
 
-		describe.only("Class Method: findCities with no parent", () => {
+		describe("Class Method: findCities with no parent", () => {
 			it("Place.findCitiesWithNoParent is a class method", () => {
 				expect(Place.findCitiesWithNoParent).to.be.a(
 					"function",
@@ -172,7 +172,7 @@ describe("Tier 1: Basic Fields, Class Methods, GET Routes", () => {
 		});
 
 		describe("GET /api/places/unassigned", () => {
-			xit("responds with all unassigned cities", async () => {
+			it("responds with all unassigned cities", async () => {
 				const response = await app.get("/api/places/unassigned");
 				expect(response.status).to.equal(200);
 				expect(response.body).to.be.an("array");

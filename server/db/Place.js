@@ -15,8 +15,57 @@ const Place = db.define("place", {
 		defaultValue: "STATE",
 		allowNull: false,
 	},
+	//* makes data an object Virtual field, not a class method (contrived, usually do in class method)
+	isState: {
+		type: Sequelize.VIRTUAL,
+		get() {
+			// return this.getDataValue("category") === "STATE";
+			return this.category === "STATE";
+			// alternatively fill in true: false with messages in where true or false is.
+			// return this.category === "STATE" ? true : false;
+		},
+	},
+	//place name is 'new york city', instead display 'NYC'
+	nickname: {
+		type: Sequelize.VIRTUAL,
+		get() {
+			//NEW YORK CITY
+			const wordsArray = this.place_name.split(" ");
+			//['NEW', 'YORK', 'CITY']
+			const capitalFirstLetterArray = wordsArray.map((word) => {
+				const firstLetter = word[0];
+				const capitalFirstLetter = firstLetter.toUpperCase();
+				return capitalFirstLetter;
+			});
+			return capitalFirstLetterArray.join("");
+		},
+	},
 });
-//*create a function in .create
+//*create a function in
+
+Place.findCitiesWithNoParent = async () => {
+	return await Place.findAll({
+		where: {
+			category: "CITY",
+			parentId: null,
+		},
+	});
+};
+
+Place.findStatesWithCities = async () => {
+	return await Place.findAll({
+		where: {
+			category: "STATE",
+		},
+		include: [
+			{
+				model: Place,
+				as: "children",
+			},
+		],
+		// include: "CITY", // 	category: "STATE",
+	});
+};
 
 /**
  * We've created the association for you!
