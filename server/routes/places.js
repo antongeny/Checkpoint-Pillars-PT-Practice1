@@ -28,12 +28,14 @@ router.get("/states", async (req, res, next) => {
 });
 
 router.delete("/:id", async (req, res, next) => {
-	const placeToDelete = await Place.findByPK(+req.params.id);
+	const placeToDelete = await Place.findByPk(+req.params.id);
 	if (placeToDelete) {
 		await placeToDelete.destroy();
 		res.sendStatus(204);
+		done();
 	} else {
 		res.sendStatus(404);
+		done();
 	}
 });
 //
