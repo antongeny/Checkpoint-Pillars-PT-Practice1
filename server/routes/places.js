@@ -32,10 +32,8 @@ router.delete("/:id", async (req, res, next) => {
 	if (placeToDelete) {
 		await placeToDelete.destroy();
 		res.sendStatus(204);
-		done();
 	} else {
 		res.sendStatus(404);
-		done();
 	}
 });
 //

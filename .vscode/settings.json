@@ -1,4 +1,5 @@
 {
 	"workbench.settings.openDefaultSettings": false,
-	"json.schemas": []
+	"json.schemas": [],
+	"editor.acceptSuggestionOnCommitCharacter": false
 }
